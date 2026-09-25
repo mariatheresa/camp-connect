@@ -25,13 +25,16 @@ export default function Rate() {
     fetchRateablePeople(token).then(setPeople);
   }, [token, navigate]);
 
+  useEffect(() => {
+    if (people && index >= people.length) {
+      navigate('/suggestion', { replace: true });
+    }
+  }, [people, index, navigate]);
+
   if (!token) return null;
   if (!people) return <p>Loading…</p>;
   if (people.length === 0) return <p>No one else to rate yet.</p>;
-  if (index >= people.length) {
-    navigate('/suggestion', { replace: true });
-    return null;
-  }
+  if (index >= people.length) return null;
 
   const current = people[index];
 
