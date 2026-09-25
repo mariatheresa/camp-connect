@@ -1,0 +1,13 @@
+services:
+  app:
+    build: .
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      DATA_DIR: /data
+    volumes:
+      - camp_connect_data:/data
+
+volumes:
+  camp_connect_data:
